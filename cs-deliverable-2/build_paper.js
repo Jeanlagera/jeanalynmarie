@@ -8,6 +8,8 @@ const {
 } = require('docx');
 
 const FONT = 'Times New Roman';
+// SAFEASSIGN=1 builds the similarity-screening version: no author block, figures, or reference list.
+const SAFE = process.env.SAFEASSIGN === '1';
 const COL_W = 5040; // 3.5 in column width in DXA
 
 // ---------------------------------------------------------------- references
@@ -102,6 +104,7 @@ const H2 = (t) => body.push(new Paragraph({
 
 let figNo = 0;
 function FIG(file, caption, wIn) {
+  if (SAFE) { ++figNo; return; }
   const buf = fs.readFileSync(path.join(__dirname, 'figures', file));
   const w = buf.readUInt32BE(16), h = buf.readUInt32BE(20);
   const pxW = Math.round(wIn * 96);
@@ -277,7 +280,9 @@ if (unused.length) console.warn('Unused references:', unused.join(', '));
 
 // ---------------------------------------------------------------- front matter
 const center = (children, after = 0, before = 0) => new Paragraph({ children, alignment: AlignmentType.CENTER, spacing: { before, after } });
-const front = [
+const front = SAFE ? [
+  center([new TextRun({ text: 'A Connectivity-Aware, Zero-Trust Network Enterprise Architecture for Cross-Agency Records Interoperability in Philippine Government: A Design Science Study', font: FONT, size: 48 })], 240),
+] : [
   center([new TextRun({ text: 'A Connectivity-Aware, Zero-Trust Network Enterprise Architecture for Cross-Agency Records Interoperability in Philippine Government: A Design Science Study', font: FONT, size: 48 })], 240),
   center([new TextRun({ text: 'Jeanalyn Marie B. Lagera', font: FONT, size: 22 })]),
   center([new TextRun({ text: 'MIT-O, Network Enterprise Architecture', italics: true, font: FONT, size: 20 })]),
@@ -305,12 +310,12 @@ const doc = new Document({
   sections: [
     { properties: { page }, children: front },
     { properties: { page, type: SectionType.CONTINUOUS, column: { count: 2, space: 360, equalWidth: true } },
-      children: [abs, kw, ...body, refHead, ...refParas] },
+      children: SAFE ? [abs, kw, ...body] : [abs, kw, ...body, refHead, ...refParas] },
   ],
 });
 const words = abstractText.split(/\s+/).length;
 console.log('Abstract words:', words, '| references:', order.length);
 Packer.toBuffer(doc).then(b => {
-  fs.writeFileSync(path.join(__dirname, 'CS2_Lagera_Jeanalyn_Marie_B_IEEE.docx'), b);
+  fs.writeFileSync(path.join(__dirname, SAFE ? 'CS2_Lagera_Jeanalyn_Marie_B_IEEE_SafeAssign.docx' : 'CS2_Lagera_Jeanalyn_Marie_B_IEEE.docx'), b);
   console.log('written');
 });
