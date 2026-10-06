@@ -1,0 +1,61 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fff;font-family:"Liberation Sans",Arial,sans-serif}
+svg text{font-family:"Liberation Sans",Arial,sans-serif;fill:#111}
+.t{font-size:16.5px;font-weight:bold}
+.s{font-size:14.5px}
+.v{font-size:15.5px;font-weight:bold;fill:#fff}
+.vs{font-size:13.5px;fill:#fff}
+</style></head><body>
+<svg id="fig" xmlns="http://www.w3.org/2000/svg" width="700" height="600" viewBox="0 0 700 600">
+<!-- Governance plane (left) -->
+<rect x="4" y="4" width="92" height="592" rx="6" fill="#4a4a4a"/>
+<g transform="translate(40,300) rotate(-90)">
+<text class="v" text-anchor="middle" x="0" y="0">PLANE B · GOVERNANCE &amp; COMPLIANCE</text>
+<text class="vs" text-anchor="middle" x="0" y="22">EA board · RA 12254/12234/10173 · decision gates</text>
+<text class="vs" text-anchor="middle" x="0" y="42">data-sharing agreements · readiness tiers 0–3</text>
+</g>
+<!-- Security plane (right) -->
+<rect x="604" y="4" width="92" height="592" rx="6" fill="#7a1f1f"/>
+<g transform="translate(640,300) rotate(-90)">
+<text class="v" text-anchor="middle" x="0" y="0">PLANE A · ZERO-TRUST SECURITY &amp; IDENTITY</text>
+<text class="vs" text-anchor="middle" x="0" y="22">PhilSys · agency PKI/mTLS · MFA · PDP/PEP</text>
+<text class="vs" text-anchor="middle" x="0" y="42">micro-segmentation · SIEM/SOC · ISO 27001</text>
+</g>
+<!-- Layers -->
+<g>
+<rect x="104" y="4" width="492" height="108" rx="5" fill="#e8eef6" stroke="#2f4f75" stroke-width="1.6"/>
+<text x="116" y="28" class="t">L5 Business &amp; Citizen Services</text>
+<text x="116" y="52" class="s">Composite service “Verify school site”; permits,</text>
+<text x="116" y="72" class="s">land, social, disaster services; eGovPH channel;</text>
+<text x="116" y="92" class="s">assisted channels for low-connectivity users</text>
+</g>
+<g>
+<rect x="104" y="124" width="492" height="108" rx="5" fill="#e3ecf3" stroke="#2f4f75" stroke-width="1.6"/>
+<text x="116" y="148" class="t">L4 Applications &amp; Emerging-Tech Services</text>
+<text x="116" y="172" class="s">Records mgmt (SSO-DMS) · AI extraction with human</text>
+<text x="116" y="192" class="s">review · analytics dashboards · hash anchoring</text>
+<text x="116" y="212" class="s">(only if decision gate passed) · IoT feeds (hazards)</text>
+</g>
+<g>
+<rect x="104" y="244" width="492" height="108" rx="5" fill="#d7e6d7" stroke="#3c6b3c" stroke-width="2.6"/>
+<text x="116" y="268" class="t">L3 Data &amp; Interoperability (federated)</text>
+<text x="116" y="292" class="s">Gov’t Interoperability Gateway: security servers,</text>
+<text x="116" y="312" class="s">API contracts, service catalog, canonical School-</text>
+<text x="116" y="332" class="s">Site Record, ID crosswalk, validation, signed logs</text>
+</g>
+<g>
+<rect x="104" y="364" width="492" height="108" rx="5" fill="#ecebe3" stroke="#6b6436" stroke-width="1.6"/>
+<text x="116" y="388" class="t">L2 Shared Digital Infrastructure</text>
+<text x="116" y="412" class="s">GovCloud / national gov’t data centers (primary)</text>
+<text x="116" y="432" class="s">+ out-of-region DR site; replication, backup,</text>
+<text x="116" y="452" class="s">autoscaling; RPO ≤ 15 min, RTO ≤ 4 h targets</text>
+</g>
+<g>
+<rect x="104" y="484" width="492" height="112" rx="5" fill="#f6ecdc" stroke="#8a5a14" stroke-width="1.6"/>
+<text x="116" y="508" class="t">L1 Connectivity &amp; Access Network</text>
+<text x="116" y="532" class="s">SD-WAN edge per office; diverse primary (fiber) +</text>
+<text x="116" y="552" class="s">secondary (LEO/5G FWA) from different providers</text>
+<text x="116" y="572" class="s">(RA 12234); GovNet; store-and-forward edge queue</text>
+</g>
+</svg></body></html>
